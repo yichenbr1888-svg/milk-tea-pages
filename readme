@@ -1,0 +1,31 @@
+进入仓库 → Settings → Pages
+
+Build and deployment 选择：Deploy from branch
+
+Branch 选择：main（或 master）
+
+文件夹选择 /root
+
+保存即可。
+
+你的网页访问地址格式将是：
+
+https://你的用户名.github.io/仓库名/
+
+
+例如：
+
+https://abc123.github.io/milk-tea-pages/
+
+🚀 第 3 步：创建 GitHub Token（脚本需要它来自动上传文件）
+
+GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)
+
+创建 token：
+
+权限勾：
+✔ repo（必须）
+
+记住生成的 token，例如：
+
+ghp_xxxxxxxxxxxxxxxxxxxx    
