@@ -7,58 +7,98 @@
 <title>奶茶信息</title>
 
 <style>
+
+    /* ---- 粘土风噪点纹理 ---- */
     body {
         margin: 0;
         padding: 0;
-        background: #A8E6CF;
         font-family: "Arial", sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
         overflow: hidden;
+        background: #A8E6CF;
+        position: relative;
     }
 
+    /* ---- 流体背景（柔和渐变运动） ---- */
+    .liquid-bg {
+        position: absolute;
+        width: 140%;
+        height: 140%;
+        left: -20%;
+        top: -20%;
+        background: radial-gradient(circle at 30% 30%, #B9FBC0 0%, transparent 60%),
+                    radial-gradient(circle at 70% 70%, #FFD3B4 0%, transparent 60%),
+                    radial-gradient(circle at 20% 80%, #FFABAB 0%, transparent 60%);
+        animation: flow 12s ease-in-out infinite alternate;
+        filter: blur(80px);
+        z-index: -1;
+    }
+
+    @keyframes flow {
+        0% {
+            transform: scale(1) translate(0, 0);
+        }
+        50% {
+            transform: scale(1.1) translate(20px, -30px);
+        }
+        100% {
+            transform: scale(1) translate(-10px, 20px);
+        }
+    }
+
+    /* ---- 外部容器（3D 弹性 + 粘土风阴影） ---- */
     .card {
         width: 90%;
         max-width: 420px;
         padding: 24px;
         background: #FFE5B4;
         border-radius: 35px;
-        box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.2);
-        transform: scale(0.8);
-        animation: popIn 0.8s ease-out forwards;
+        margin: 60px auto;
+        box-shadow:
+            10px 10px 20px rgba(0,0,0,0.15),
+            -5px -5px 15px rgba(255,255,255,0.6);
+        animation: popIn 0.8s cubic-bezier(.16,.9,.42,1.2) forwards;
+        transform: scale(0.7) rotateX(15deg);
     }
 
+    /* ---- 3D 压扁弹跳动画 ---- */
     @keyframes popIn {
-        from {
+        0% {
             opacity: 0;
-            transform: scale(0.5) rotate(5deg);
+            transform: scale(0.3) rotateX(25deg);
         }
-        to {
+        60% {
+            transform: scale(1.08) rotateX(0deg);
+        }
+        80% {
+            transform: scale(0.95);
+        }
+        100% {
             opacity: 1;
-            transform: scale(1) rotate(0deg);
+            transform: scale(1) rotateX(0deg);
         }
     }
 
     .title {
         text-align: center;
         color: #FFABAB;
-        font-size: 28px;
+        font-size: 30px;
         font-weight: bold;
         margin-bottom: 20px;
         text-shadow: 2px 2px #ffffff;
     }
 
+    /* ---- 单个项目（柔和弹性） ---- */
     .item {
         background: #FFD3B4;
         padding: 16px;
         margin-bottom: 15px;
-        border-radius: 22px;
-        box-shadow: 0px 6px 12px rgba(0,0,0,0.15);
-        animation: bounceIn 0.6s ease-out forwards;
+        border-radius: 25px;
+        box-shadow:
+            6px 6px 12px rgba(0,0,0,0.15),
+            -4px -4px 10px rgba(255,255,255,0.6);
+        animation: itemBounce 0.8s cubic-bezier(.16,.9,.42,1.2) forwards;
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(20px) scale(0.9);
     }
 
     .item:nth-child(2) { animation-delay: 0.2s; }
@@ -67,10 +107,19 @@
     .item:nth-child(5) { animation-delay: 0.8s; }
     .item:nth-child(6) { animation-delay: 1.0s; }
 
-    @keyframes bounceIn {
-        0% { opacity: 0; transform: translateY(40px) scale(0.9); }
-        60% { opacity: 1; transform: translateY(-10px) scale(1.02); }
-        100% { opacity: 1; transform: translateY(0) scale(1); }
+    @keyframes itemBounce {
+        0% {
+            opacity: 0;
+            transform: translateY(30px) scale(0.9);
+        }
+        60% {
+            opacity: 1;
+            transform: translateY(-8px) scale(1.03);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0px) scale(1);
+        }
     }
 
     .label {
@@ -84,10 +133,13 @@
         font-size: 18px;
         color: #444;
     }
+
 </style>
 
 </head>
 <body>
+
+<div class="liquid-bg"></div>
 
 <div class="card">
     <div class="title">奶茶详情</div>
@@ -96,7 +148,7 @@
     <div class="item"><span class="label">奶茶品类：</span><span class="value">抹茶</span></div>
     <div class="item"><span class="label">价格：</span><span class="value">$16</span></div>
     <div class="item"><span class="label">时间：</span><span class="value">2026.1.31.16:00</span></div>
-    <div class="item"><span class="label">地点：</span><span class="value">云gui南</span></div>
+    <div class="item"><span class="label">地点：</span><span class="value">云南</span></div>
 </div>
 
 </body>
